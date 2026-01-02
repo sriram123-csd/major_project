@@ -1,0 +1,7 @@
+artifacts/model/
+artifacts/models/
+*.pkl
+*.joblib
+mlruns/
+logs/
+venv/
