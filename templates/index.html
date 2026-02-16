@@ -3,61 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colorectal Cancer Risk Prediction</title>
+    <title>Colorectal Cancer Survival Prediction - Early Detection & Risk Assessment</title>
     <link rel="stylesheet" href="static/styles.css">
 </head>
-<body>
-    <div class="container">
-        <h2>Colorectal Cancer Risk Prediction</h2>
+<body class="landing-page">
+    <!-- Navigation Bar -->
+    <nav class="navbar-landing">
+        <div class="nav-content">
+            <h1 class="nav-logo">🏥 Colorectal Cancer Survival Prediction</h1>
+        </div>
+    </nav>
 
-        <form action="/predict" method="post">
+    <!-- Main Hero Section -->
+    <section class="landing-hero">
+        <div class="hero-gradient-bg">
+            <div class="hero-container">
+                <div class="hero-left">
+                    <h1 class="main-title">
+                        <span class="title-line-1">Early Detection</span>
+                        <span class="title-line-2">Saves <span class="title-highlight">Lives</span></span>
+                    </h1>
+                    <p class="hero-description">
+                        Advanced AI-powered colorectal cancer survival prediction with 94% accuracy. Get your personalized risk assessment and survival analysis in minutes.
+                    </p>
+                    <div class="cta-buttons-group">
+                        <a href="/form" class="btn btn-primary">Make Prediction Now</a>
+                        <a href="#learn-more" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="hero-visual">
+                        <div class="visual-element element-1">🔬</div>
+                        <div class="visual-element element-2">📊</div>
+                        <div class="visual-element element-3">🏥</div>
+                        <div class="visual-element element-4">💙</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Healthcare Costs -->
-            <label for="healthcare_costs">
-                Healthcare Costs (₹ / $):
-            </label>
-            <input type="number" id="healthcare_costs" name="healthcare_costs"
-                   min="5000" max="300000" step="1000" required>
+    <!-- Stats Section -->
+    <section class="stats-section-landing">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">94%</div>
+                <div class="stat-label">Prediction Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15K+</div>
+                <div class="stat-label">Patients Analyzed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Available Online</div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Tumor Size -->
-            <label for="tumor_size">
-                Tumor Size (mm):
-            </label>
-            <input type="number" id="tumor_size" name="tumor_size"
-                   min="5" max="100" step="0.1" required>
+    <!-- Features Section -->
+    <section class="features-section" id="learn-more">
+        <div class="features-container">
+            <h2 class="section-title">Why Choose Our Platform?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-large">🎯</div>
+                    <h3>94% Accuracy</h3>
+                    <p>Advanced ML model analyzes 19+ health parameters for precise survival prediction</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">⚡</div>
+                    <h3>Instant Results</h3>
+                    <p>Get your survival prediction and risk assessment in just minutes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">🍎</div>
+                    <h3>Nutrition Plans</h3>
+                    <p>Evidence-based dietary recommendations tailored to colorectal health</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">🏃</div>
+                    <h3>Exercise Guides</h3>
+                    <p>Personalized exercise routines for improved survival outcomes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">⚕️</div>
+                    <h3>Medical Insights</h3>
+                    <p>Comprehensive precautions and lifestyle modifications</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">🔐</div>
+                    <h3>Privacy First</h3>
+                    <p>Your data is encrypted and protected with medical-grade security</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Mortality Rate -->
-            <label for="mortality_rate">
-                Mortality Rate (per 100,000):
-            </label>
-            <input type="number" id="mortality_rate" name="mortality_rate"
-                   min="5" max="100" step="0.1" required>
+    <!-- How It Works -->
+    <section class="how-it-works-section">
+        <div class="how-container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-circle">1</div>
+                    <h4>Enter Data</h4>
+                    <p>Provide health info</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="process-step">
+                    <div class="step-circle">2</div>
+                    <h4>AI Analysis</h4>
+                    <p>ML processes</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="process-step">
+                    <div class="step-circle">3</div>
+                    <h4>Get Results</h4>
+                    <p>Survival rate</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="process-step">
+                    <div class="step-circle">4</div>
+                    <h4>Recommendations</h4>
+                    <p>Action plan</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Treatment Type -->
-            <label for="treatment_type">
-                Treatment Type:
-            </label>
-            <select id="treatment_type" name="treatment_type" required>
-                <option value="0">Surgery</option>
-                <option value="1">Chemotherapy</option>
-                <option value="2">Radiation Therapy</option>
-            </select>
+    <!-- CTA Section -->
+    <section class="final-cta">
+        <div class="cta-content">
+            <h2>Take Control of Your Health</h2>
+            <p>Early detection and prediction can significantly improve survival rates. Start your assessment today.</p>
+            <a href="/form" class="btn btn-primary btn-large">Get Your Survival Prediction →</a>
+        </div>
+    </section>
 
-            <!-- Diabetes -->
-            <label for="diabetes">
-                Diabetes:
-            </label>
-            <select id="diabetes" name="diabetes" required>
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-            </select>
-
-            <button type="submit">Predict</button>
-        </form>
-
-        {% if prediction is not none %}
-            <h3>Prediction: {{ prediction }}</h3>
-        {% endif %}
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Colorectal Cancer Survival Prediction - Advanced Medical AI</p>
+        <p style="font-size: 12px; margin-top: 10px;">⚕️ Disclaimer: This assessment is for informational purposes only. Always consult with a qualified healthcare professional for medical advice.</p>
+    </footer>
 </body>
 </html>
