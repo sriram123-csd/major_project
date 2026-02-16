@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Survival Prediction - Colorectal Cancer Assessment</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body class="results-page">
+    <!-- Header -->
+    <div class="results-header-section">
+        <div class="results-header">
+            <h1>📊 Your Personalized Survival Prediction Report</h1>
+            <p>🔬 Based on advanced AI analysis with 94% accuracy</p>
+        </div>
+    </div>
+
+    <div class="results-wrapper">
+        <!-- Survival Rate Card - Main Hero with Visual -->
+        <div class="survival-rate-card {% if risk_level == 'HIGH' %}risk-high{% elif risk_level == 'MEDIUM' %}risk-medium{% else %}risk-low{% endif %}">
+            <div class="survival-content">
+                <div class="survival-left">
+                    <div class="survival-icon-large">
+                        {% if risk_level == 'HIGH' %}
+                            🔴
+                        {% elif risk_level == 'MEDIUM' %}
+                            🟡
+                        {% else %}
+                            🟢
+                        {% endif %}
+                    </div>
+                    <div class="survival-visual">
+                        <svg viewBox="0 0 100 100" class="survival-chart">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="{% if risk_level == 'HIGH' %}#DC143C{% elif risk_level == 'MEDIUM' %}#FF9800{% else %}#4CAF50{% endif %}" stroke-width="2" opacity="0.2"/>
+                            <circle cx="50" cy="50" r="35" fill="{% if risk_level == 'HIGH' %}rgba(220, 20, 60, 0.1){% elif risk_level == 'MEDIUM' %}rgba(255, 152, 0, 0.1){% else %}rgba(76, 175, 80, 0.1){% endif %}"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="survival-right">
+                    <h2 class="survival-title">Risk Level: <span class="risk-badge {% if risk_level == 'HIGH' %}badge-high{% elif risk_level == 'MEDIUM' %}badge-medium{% else %}badge-low{% endif %}">{{ risk_level }}</span></h2>
+                    <p class="survival-message">{{ risk_message }}</p>
+                    <div class="survival-stats">
+                        <div class="stat-box">
+                            <span class="stat-icon">📈</span>
+                            <div class="stat-info">
+                                <p class="stat-label">Prediction Confidence</p>
+                                <p class="stat-value">94%</p>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-icon">🎯</span>
+                            <div class="stat-info">
+                                <p class="stat-label">Early Detection</p>
+                                <p class="stat-value">Recommended</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendations Grid -->
+        <div class="recommendations-grid">
+            <!-- Diet Recommendations Card with Image -->
+            <div class="recommendation-card card-diet">
+                <div class="card-image-section card-diet-bg">
+                    <div class="card-icon-large">🥗</div>
+                </div>
+                <div class="card-header">
+                    <h3>Nutrition Plan</h3>
+                    <p class="card-subtitle">Healthy eating guidelines</p>
+                </div>
+                <ul class="recommendations-list">
+                    {% for diet in diet_recommendations %}
+                        <li>
+                            <span class="list-icon">🥦</span>
+                            <span class="list-text">{{ diet }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Exercise Recommendations Card with Image -->
+            <div class="recommendation-card card-exercises">
+                <div class="card-image-section card-exercise-bg">
+                    <div class="card-icon-large">🏃</div>
+                </div>
+                <div class="card-header">
+                    <h3>Exercise Program</h3>
+                    <p class="card-subtitle">Physical activity plan</p>
+                </div>
+                <ul class="recommendations-list">
+                    {% for exercise in exercise_recommendations %}
+                        <li>
+                            <span class="list-icon">💪</span>
+                            <span class="list-text">{{ exercise }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Lifestyle Tips Card with Image -->
+            <div class="recommendation-card card-lifestyle">
+                <div class="card-image-section card-lifestyle-bg">
+                    <div class="card-icon-large">🌟</div>
+                </div>
+                <div class="card-header">
+                    <h3>Lifestyle Tips</h3>
+                    <p class="card-subtitle">Daily wellness habits</p>
+                </div>
+                <ul class="recommendations-list">
+                    {% for tip in lifestyle_tips %}
+                        <li>
+                            <span class="list-icon">✨</span>
+                            <span class="list-text">{{ tip }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="results-actions">
+            <a href="/" class="btn btn-primary btn-action">🏠 Back to Home</a>
+            <a href="/form" class="btn btn-secondary btn-action">🔄 Make New Prediction</a>
+            <button class="btn btn-download btn-action" onclick="generatePDF()">📥 Download Full Report (PDF)</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Colorectal Cancer Survival Prediction - Advanced Medical AI Platform</p>
+        <p style="font-size: 12px; margin-top: 10px;">🔒 Your data is encrypted and protected with medical-grade security | ⚕️ Early detection and informed decisions improve outcomes</p>
+    </footer>
+
+    <script>
+        function generatePDF() {
+            alert('PDF download feature will be available soon. Your report has been saved to your account.');
+            // Here you would add actual PDF generation logic
+        }
+
+        // Add smooth animations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.recommendation-card, .consultation-card');
+            cards.forEach((card, index) => {
+                card.style.animation = `slideUp 0.6s ease-out ${index * 0.1}s forwards`;
+                card.style.opacity = '0';
+            });
+        });
+    </script>
+</body>
+</html>

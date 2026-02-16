@@ -1,7 +1,7 @@
 Metadata-Version: 2.4
 Name: MLOPS-PROJECT-5
 Version: 0.1
-Author: Sudhanshu
+Author: Sriram
 Requires-Dist: pandas
 Requires-Dist: numpy
 Requires-Dist: setuptools
@@ -11,6 +11,6 @@ Requires-Dist: joblib
 Requires-Dist: matplotlib
 Requires-Dist: seaborn
 Requires-Dist: mlflow
-Requires-Dist: kfp
+Requires-Dist: kfp==1.8.22
 Dynamic: author
 Dynamic: requires-dist

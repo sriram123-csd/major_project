@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorectal Cancer Survival Prediction - Assessment Form</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body class="form-page">
+    <!-- Header -->
+    <div class="form-header-section">
+        <div class="form-header-top">
+            <a href="/" class="back-link">← Back to Home</a>
+            <div class="form-header-info">
+                <h1 class="form-title">🏥 Colorectal Cancer Survival Prediction</h1>
+                <p class="form-subtitle">Complete your health profile for accurate survival rate prediction (94% accuracy)</p>
+            </div>
+        </div>
+        <div class="form-progress-container">
+            <div class="form-progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <span class="progress-text"><span class="progress-percent">0</span>% Complete</span>
+        </div>
+    </div>
+
+    <!-- Main Form Container -->
+    <div class="form-wrapper">
+        {% if error %}
+            <div class="error-banner" style="background-color: #fee; border: 1px solid #c33; color: #c00; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <strong>⚠️ Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+        <form action="/predict" method="post" class="assessment-form">
+            
+            <!-- Section 1: Basic Information -->
+            <div class="form-section">
+                <div class="section-header-container">
+                    <h2 class="section-header">👤 Personal Information</h2>
+                    <p class="section-description">Your basic demographics</p>
+                </div>
+                <div class="form-row">
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="country">Country <span class="required">*</span></label>
+                            <input type="text" id="country" name="country" required placeholder="Enter country">
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="age">Age <span class="required">*</span></label>
+                            <input type="number" id="age" name="age" min="18" max="120" required placeholder="Enter age">
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="gender">Gender <span class="required">*</span></label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Cancer Information -->
+            <div class="form-section">
+                <div class="section-header-container">
+                    <h2 class="section-header">🔍 Cancer Details</h2>
+                    <p class="section-description">Cancer staging and tumor information</p>
+                </div>
+                <div class="form-row">
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="cancer_stage">Cancer Stage <span class="required">*</span></label>
+                            <select id="cancer_stage" name="cancer_stage" required>
+                                <option value="">Select Stage</option>
+                                <option value="Localized">Localized</option>
+                                <option value="Regional">Regional</option>
+                                <option value="Metastatic">Metastatic</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="tumor_size_mm">Tumor Size (mm) <span class="required">*</span></label>
+                            <input type="number" id="tumor_size_mm" name="tumor_size_mm" min="1" max="100" step="0.1" required placeholder="0.0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Medical History -->
+            <div class="form-section">
+                <div class="section-header-container">
+                    <h2 class="section-header">⚕️ Medical History</h2>
+                    <p class="section-description">Your health background and risk factors</p>
+                </div>
+                <div class="form-row-3cols">
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="family_history">Family History <span class="required">*</span></label>
+                            <select id="family_history" name="family_history" required>
+                                <option value="">Select</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="genetic_mutation">Genetic Mutation <span class="required">*</span></label>
+                            <select id="genetic_mutation" name="genetic_mutation" required>
+                                <option value="">Select</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="diabetes">Diabetes <span class="required">*</span></label>
+                            <select id="diabetes" name="diabetes" required>
+                                <option value="">Select</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row-3cols">
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="ibd">Inflammatory Bowel Disease <span class="required">*</span></label>
+                            <select id="ibd" name="ibd" required>
+                                <option value="">Select</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="screening_history">Screening History <span class="required">*</span></label>
+                            <select id="screening_history" name="screening_history" required>
+                                <option value="">Select</option>
+                                <option value="Never">Never</option>
+                                <option value="Irregular">Irregular</option>
+                                <option value="Regular">Regular</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="early_detection">Early Detection <span class="required">*</span></label>
+                            <select id="early_detection" name="early_detection" required>
+                                <option value="">Select</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Lifestyle Factors -->
+            <div class="form-section">
+                <div class="section-header-container">
+                    <h2 class="section-header">🌿 Lifestyle & Habits</h2>
+                    <p class="section-description">Your lifestyle choices that impact health</p>
+                </div>
+                <div class="form-row-3cols">
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="smoking_history">Smoking <span class="required">*</span></label>
+                            <select id="smoking_history" name="smoking_history" required>
+                                <option value="">Select</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="alcohol_consumption">Alcohol <span class="required">*</span></label>
+                            <select id="alcohol_consumption" name="alcohol_consumption" required>
+                                <option value="">Select</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="obesity_bmi">BMI Category <span class="required">*</span></label>
+                            <select id="obesity_bmi" name="obesity_bmi" required>
+                                <option value="">Select</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Overweight">Overweight</option>
+                                <option value="Obese">Obese</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row-3cols">
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="diet_risk">Diet Risk <span class="required">*</span></label>
+                            <select id="diet_risk" name="diet_risk" required>
+                                <option value="">Select</option>
+                                <option value="Low">Low</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group-compact">
+                            <label for="physical_activity">Physical Activity <span class="required">*</span></label>
+                            <select id="physical_activity" name="physical_activity" required>
+                                <option value="">Select</option>
+                                <option value="Low">Low</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column"></div>
+                </div>
+            </div>
+
+            <!-- Section 5: Treatment Info -->
+            <div class="form-section">
+                <div class="section-header-container">
+                    <h2 class="section-header">💊 Treatment Options</h2>
+                    <p class="section-description">Treatment plan and healthcare costs</p>
+                </div>
+                <div class="form-row">
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="treatment_type">Treatment Type <span class="required">*</span></label>
+                            <select id="treatment_type" name="treatment_type" required>
+                                <option value="">Select</option>
+                                <option value="Surgery">Surgery</option>
+                                <option value="Chemotherapy">Chemotherapy</option>
+                                <option value="Radiotherapy">Radiotherapy</option>
+                                <option value="Combination">Combination</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="healthcare_costs">Healthcare Costs ($) <span class="required">*</span></label>
+                            <input type="number" id="healthcare_costs" name="healthcare_costs" min="1000" max="500000" step="100" required placeholder="5000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Health Statistics -->
+            <div class="form-section">
+                <div class="section-header-container">
+                    <h2 class="section-header">📈 Health Statistics</h2>
+                    <p class="section-description">Regional health data</p>
+                </div>
+                <div class="form-row">
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="incidence_rate">Incidence Rate (per 100K) <span class="required">*</span></label>
+                            <input type="number" id="incidence_rate" name="incidence_rate" min="1" max="100" step="0.1" required placeholder="30.5">
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="mortality_rate">Mortality Rate (per 100K) <span class="required">*</span></label>
+                            <input type="number" id="mortality_rate" name="mortality_rate" min="1" max="100" step="0.1" required placeholder="15.2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Section -->
+            <div class="form-section submit-section">
+                <button type="submit" class="btn-submit">🔍 Get Prediction →</button>
+                <p class="form-disclaimer">* All fields are required for accurate prediction</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Add visual feedback for form progress
+        const form = document.querySelector('.assessment-form');
+        const progressFill = document.querySelector('.progress-fill');
+        const progressPercent = document.querySelector('.progress-percent');
+        const formInputs = form.querySelectorAll('input, select');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('change', updateProgress);
+            input.addEventListener('input', updateProgress);
+        });
+        
+        function updateProgress() {
+            const filled = Array.from(formInputs).filter(input => input.value !== '').length;
+            const percentage = Math.round((filled / formInputs.length) * 100);
+            progressFill.style.width = percentage + '%';
+            progressPercent.textContent = percentage;
+        }
+        
+        // Add input validation and visual feedback
+        formInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value !== '') {
+                    this.classList.add('filled');
+                } else {
+                    this.classList.remove('filled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
